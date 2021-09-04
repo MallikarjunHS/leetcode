@@ -9,7 +9,7 @@ Test Cases:
     [[-1]]
 """
 
-# Solution 1: 
+# Approach 1: 
 # Time Complexity: O(n2)
 # Results: Runtime: 178 ms and Memory Usage: 14.6 MB
 class Solution(object):
@@ -21,15 +21,18 @@ class Solution(object):
                     n_count = n_count+1
         return n_count
 
-# Solution 1: 
+# Approach 2: 
 # Results: Runtime: 136 ms and Memory Usage: 14.6 MB
+# We know 
+# 1) Matrix elements are sorted 
+# 2) no need to traverse all elements once encounter +/- number.
 class Solution2(object):
     def countNegatives(self, grid):
         n_count = 0
         row_length = len(grid[0])
-        for an_item in grid:
-            for i in range(row_length):
-                if an_item[i] < 0:
-                    n_count = n_count+(row_length-i)
+        for grid_row in grid:
+            for col_num in range(row_length):
+                if grid_row[col_num] < 0:
+                    n_count = n_count+(row_length-col_num)
                     break
         return n_count
