@@ -36,3 +36,34 @@ class Solution2(object):
                     n_count = n_count+(row_length-col_num)
                     break
         return n_count
+
+# Approach 3: Implements the Binary Search.
+# Results: 
+#   Runtime: 
+#       92 ms, faster than 91.33% of Python online submissions 
+#       for Count Negative Numbers in a Sorted Matrix.
+#   Memory Usage: 
+#       14.5 MB, less than 87.00% of Python online submissions for Count
+#       Negative Numbers in a Sorted Matrix.
+class Solution3(object):
+    def countNegatives(self, grid):
+        negative_num_count = 0
+        if(len(grid) == 0):
+            return negative_num_count
+        for i_array in grid:
+            if i_array[-1] >= 0:
+                continue
+            elif i_array[0] < 0:
+                negative_num_count += len(i_array)
+                continue
+            left = 0
+            right = len(i_array)-1
+            while left < right:
+                mid = left+(right-left)//2
+                if i_array[mid] < 0:
+                    right = mid
+                elif i_array[mid] >= 0:
+                    left = mid+1
+            negative_num_count += len(i_array)-right
+        return negative_num_count
+        
